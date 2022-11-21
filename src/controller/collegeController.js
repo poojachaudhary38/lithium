@@ -14,6 +14,7 @@ const isValid = function (value) {
 }
 
 
+// // // Get all detail 
 const getCollegeDetails = async function (req, res) {
     try {
         const collegeName = req.query.collegeName
