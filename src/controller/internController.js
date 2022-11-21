@@ -55,7 +55,7 @@ const createIntern = async function (req, res) {
 
         let collegeIdByClgName = await collegeModel.findOne({ name: collegeName })
 
-        if (!collegeIdByClgName) return res.status(400).send({ status: false, message: "Given name is not present in DB" })
+        if (!collegeIdByClgName) return res.status(404).send({ status: false, message: "Given name is not present in DB" })
 
         // console.log(collegeIdByClgName)
 
