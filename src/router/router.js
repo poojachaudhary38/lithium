@@ -8,11 +8,10 @@ const collegeController = require('../controller/collegeController')
 router.get("/test-me", function (req, res) { res.status(200).send("Connection Done.") })
 
 
-// // // ### POST /functionup/interns
+
 router.post("/functionup/interns" , internController.createIntern)
 
 router.post("/functionup/colleges" , collegeController.createCollege)
-
 
 router.get("/functionup/collegeDetails" , collegeController.getCollegeDetails)
 

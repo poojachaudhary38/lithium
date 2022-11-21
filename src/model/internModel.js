@@ -6,7 +6,6 @@ const internSchema = new mongoose.Schema({
     {
         type: String,
         required: "Name is mandatory",
-        unique: true,
         trim: true
     },
 

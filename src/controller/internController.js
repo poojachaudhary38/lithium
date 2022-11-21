@@ -46,14 +46,18 @@ const createIntern = async function (req, res) {
         // // if collegeName is not given and not should empty
         if (!isValid(collegeName)) return res.status(400).send({ status: false, message: "college Name is not given or Invalid College Name." })
 
-
         // console.log(body)
+
+
+        let alreadyData = await internModel.findOne({$or : [{mobile : mobile} , {email : email}]})
+
+        if(alreadyData) return res.status(400).send({ status: false, message: "Email or Mobile is already used." })
 
         let collegeIdByClgName = await collegeModel.findOne({ name: collegeName })
 
         if (!collegeIdByClgName) return res.status(400).send({ status: false, message: "Given name is not present in DB" })
 
-        console.log(collegeIdByClgName)
+        // console.log(collegeIdByClgName)
 
         body.collegeId = collegeIdByClgName._id
 
