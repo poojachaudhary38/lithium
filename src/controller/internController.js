@@ -52,9 +52,9 @@ const createIntern = async function (req, res) {
 
         if(alreadyData) return res.status(400).send({ status: false, message: "Email or Mobile is already used." })
 
-        let collegeIdByClgName = await collegeModel.findOne({ name : collegeName })
+        let collegeIdByClgName = await collegeModel.findOne({ name : collegeName , isDeleted : false })
 
-        if (!collegeIdByClgName) return res.status(404).send({ status: false, message: "Given name is not present in DB" })
+        if (!collegeIdByClgName) return res.status(404).send({ status: false, message: "Given College Name is not present in DB or Deleted in DB" })
 
         // console.log(collegeIdByClgName)
 
