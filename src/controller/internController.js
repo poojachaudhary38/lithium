@@ -13,7 +13,7 @@ const mobileReg = /^([+]\d{2})?\d{10}$/
 
 
 const isValid = function (value) {
-    if (typeof value === undefined || value === null) return false;
+    if (typeof value === "undefined" || value === "null") return false;
 
     if (typeof value === 'string' && value.trim().length === 0) return false
 
@@ -53,7 +53,7 @@ const createIntern = async function (req, res) {
 
         if(alreadyData) return res.status(400).send({ status: false, message: "Email or Mobile is already used." })
 
-        let collegeIdByClgName = await collegeModel.findOne({ name: collegeName })
+        let collegeIdByClgName = await collegeModel.findOne({ name : collegeName })
 
         if (!collegeIdByClgName) return res.status(404).send({ status: false, message: "Given name is not present in DB" })
 
