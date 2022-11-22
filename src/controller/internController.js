@@ -13,7 +13,7 @@ const mobileReg = /^([+]\d{2})?\d{10}$/
 
 
 const isValid = function (value) {
-    if (typeof value === 'undefined' || value === null) return false;
+    if (typeof value === undefined || value === null) return false;
 
     if (typeof value === 'string' && value.trim().length === 0) return false
 
@@ -65,7 +65,7 @@ const createIntern = async function (req, res) {
 
         res.status(201).send({ status: true, message: "Intern created successfully", data: newInternData })
     } catch (err) {
-        return res.status(500).send({ status: false, msg: err.message })
+        return res.status(500).send({ status: false, message: err.message })
     }
 
 }
