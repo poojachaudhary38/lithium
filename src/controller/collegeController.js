@@ -26,9 +26,9 @@ const createCollege = async function(req,res) {
         if (Object.keys(data).length == 0) return res.status(400).send({status: false, message: "Data is not provided"})
         
 
-        if (!isValid(name))  return res.status(400).send({status: false, message: "Require a valid name"})
+        if (!isValid(name))  return res.status(400).send({status: false, message: "Please enter valid name"})
         
-        if (!isValid(fullName))  return res.status(400).send({status: false, message: "Please enter fullName"})
+        if (!isValid(fullName))  return res.status(400).send({status: false, message: "Please enter valid fullName"})
 
         if (!isValid(logoLink) || !logoLink.match(urlRegex))    return res.status(400).send({status: false, message: "Please enter valid logolink (Url in http:// formate)"})
         
@@ -61,16 +61,16 @@ const getCollegeDetails = async function (req, res) {
 
         const collegeDetails = await collegeModel.findOne({ name: collegeName, isDeleted: false })
 
-        if (!collegeDetails)  return res.status(404).send({ status: false, msg: "There is no such a college in this name" })
+        if (!collegeDetails)  return res.status(404).send({ status: false, msg: "There is no such a college with this name." })
         
-        const internDetails = await internModel.find({ collegeId: collegeDetails._id , isDeleted: false }).select({ isDeleted: 0, collegeId: 0 })
+        const internDetails = await internModel.find({ collegeId: collegeDetails._id , isDeleted: false }).select({ isDeleted: 0, collegeId: 0 , createdAt : 0 , updatedAt : 0 , __v : 0})
 
-        if (internDetails.length == 0) return res.status(404).send({ status: false, message: "There are no intern in this college" })
+        if (internDetails.length == 0) return res.status(404).send({ status: false, message: "There are no intern in this college." })
         
         return res.status(200).send({ status: true, data: { name: collegeDetails.name, fullName: collegeDetails.fullName, logolink: collegeDetails.logoLink, interns: internDetails } })
     }
     catch (error) {
-        console.log(err.message)
+        console.log(error.message)
         return res.status(500).send({ status: false, message: error.message })
     }
 }

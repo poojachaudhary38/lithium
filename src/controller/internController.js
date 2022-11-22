@@ -4,10 +4,9 @@ const internModel = require("../model/internModel")
 
 
 // // Some Imp. Regex are -->
-const nameReg = /^([A-Za-z ]+)$/
+const nameReg = /^([A-Za-z ]+){3,}$/
 const emailReg = /^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$/
-const mobileReg = /^([+]\d{2})?\d{10}$/
-
+const mobileReg = /^([+]\d{2})?\d{10,}$/
 
 
 
@@ -35,16 +34,16 @@ const createIntern = async function (req, res) {
         if (Object.keys(body).length <= 0) return res.status(400).send({ status: false, message: "Give some data to create " })
 
         // // if name is not given and not match with regex and not should empty
-        if (!isValid(name) || !name.match(nameReg)) return res.status(400).send({ status: false, message: "Name is Invalid." })
+        if (!isValid(name) || !name.match(nameReg)) return res.status(400).send({ status: false, message: "Name is not given or Invalid formate for Name." })
 
         // // if mobile is not given and not match with regex and not should empty
-        if (!isValid(mobile) || !mobile.match(mobileReg)) return res.status(400).send({ status: false, message: "Mobile is not given or Invalid Mobile." })
+        if (!isValid(mobile) || !mobile.match(mobileReg)) return res.status(400).send({ status: false, message: "Mobile is not given or Invalid formate for Mobile." })
 
         // // if email is not given and not match with regex and not should empty
-        if (!isValid(email) || !email.match(emailReg)) return res.status(400).send({ status: false, message: "Email is not given or Invalid Email." })
+        if (!isValid(email) || !email.match(emailReg)) return res.status(400).send({ status: false, message: "Email is not given or Invalid formate for Email." })
 
         // // if collegeName is not given and not should empty
-        if (!isValid(collegeName)) return res.status(400).send({ status: false, message: "college Name is not given or Invalid College Name." })
+        if (!isValid(collegeName)) return res.status(400).send({ status: false, message: "college Name is not given or Invalid formate for College Name." })
 
         // console.log(body)
 
@@ -65,6 +64,7 @@ const createIntern = async function (req, res) {
 
         res.status(201).send({ status: true, message: "Intern created successfully", data: newInternData })
     } catch (err) {
+        console.log(err.message)
         return res.status(500).send({ status: false, message: err.message })
     }
 
