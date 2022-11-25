@@ -7,8 +7,6 @@ const collegeController = require('../controller/collegeController')
 
 router.get("/test-me", function (req, res) { res.status(200).send("Connection Done.") })
 
-
-
 router.post("/functionup/interns" , internController.createIntern)
 
 router.post("/functionup/colleges" , collegeController.createCollege)
@@ -16,9 +14,5 @@ router.post("/functionup/colleges" , collegeController.createCollege)
 router.get("/functionup/collegeDetails" , collegeController.getCollegeDetails)
 
 
+module.exports = router;
 
-
-
-
-
-module.exports = router

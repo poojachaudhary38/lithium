@@ -23,10 +23,10 @@ const isValid = function (value) {
 
 // // // Route handler for create intern Api
 const createIntern = async function (req, res) {
+try {
+    res.setHeader('Access-Control-Allow-Origin','*')
 
-    try {
-
-        let body = req.body
+        let data = req.body
 
         let { name, mobile, email, collegeName } = body
 
@@ -69,10 +69,6 @@ const createIntern = async function (req, res) {
     }
 
 }
-
-
-
-
 
 
 module.exports = { createIntern }

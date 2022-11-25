@@ -1,5 +1,3 @@
-
-
 const collegeModel = require("../model/collegeModel")
 const internModel = require("../model/internModel")
 
@@ -20,22 +18,23 @@ const urlRegex = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-
 
 const createCollege = async function(req,res) {
     try {
+        res.setHeader('Access-Control-Allow-Origin','*')
         let data = req.body;
         const { name, fullName, logoLink } = data;
 
         if (Object.keys(data).length == 0) return res.status(400).send({status: false, message: "Data is not provided"})
         
-
-        if (!isValid(name))  return res.status(400).send({status: false, message: "Please enter valid name"})
         
-        if (!isValid(fullName))  return res.status(400).send({status: false, message: "Please enter valid fullName"})
+        if (!isValid(name)) return res.status(400).send({status: false, message: "Please enter valid name"})
+        
+        if (!isValid(fullName)) return res.status(400).send({status: false, message: "Please enter valid fullName"})
 
-        if (!isValid(logoLink) || !logoLink.match(urlRegex))    return res.status(400).send({status: false, message: "Please enter valid logolink (Url in http:// formate)"})
+        if (!isValid(logoLink) || !logoLink.match(urlRegex)) return res.status(400).send({status: false, message: "Please enter valid logolink (Url in http:// formate)"})
         
 
         let duplicateName = await collegeModel.findOne({$or : [{name : name} , {fullName : fullName}]})
 
-        if (duplicateName)  return res.status(400).send({status: false, message: "College name already exist (Abbrevation or Full name of College is already exist)"})
+        if (duplicateName) return res.status(400).send({status: false, message: "College name already exist (Abbrevation or Full name of College is already exist)"})
 
 
         const newCollege = await collegeModel.create(data);
@@ -48,10 +47,10 @@ const createCollege = async function(req,res) {
 }
 
 
-
 // // // Get all detail 
 const getCollegeDetails = async function (req, res) {
     try {
+       res.setHeader('Access-Control-Allow-Origin','*')
         const query = req.query
         const collegeName = query.collegeName
 
@@ -76,10 +75,7 @@ const getCollegeDetails = async function (req, res) {
 }
 
 
+module.exports = { getCollegeDetails  ,createCollege}
 
 
 
-
-
-
-module.exports = { getCollegeDetails  ,createCollege  }

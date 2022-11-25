@@ -36,9 +36,6 @@ const internSchema = new mongoose.Schema({
         default: false
     }
 
-},
-    { timestamps: true }
-
-)
+}, { timestamps: true })
 
 module.exports = mongoose.model("intern", internSchema)
