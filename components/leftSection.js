@@ -23,7 +23,7 @@ export default function LeftSection({
             
             <div>
                 <div className={sectionStyles.companyNameContainer}>
-                    <img src={collegeLogo} alt="logo" width={80 * scaleFactor} height={80 * scaleFactor} />
+                    <img src= "https://functionup-stg.s3.ap-south-1.amazonaws.com/thorium/iitd.png" alt="logo" width={80 * scaleFactor} height={80 * scaleFactor} />
                     <div style={{marginLeft:`1rem` }}>
                         <h2 className={sectionStyles.collegeName}>{collegeFullName.trim()}</h2>
                         {!!collegeCity && <small className={sectionStyles.collegeCity} >{collegeCity.trim()}</small>}
