@@ -5,7 +5,6 @@ const moment = require('moment');
 const validator= require("../regex");
 
 const createreview=async (req,res)=>{
-   
     try{
     let bookId = req.params.bookId
     let data=req.body
